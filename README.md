@@ -4,6 +4,30 @@ A full-stack restaurant/shop management system with an Express/MongoDB API and a
 
 ## Screenshots
 
+![Portfolio project visual](docs/screenshots/design-02.png)
+
+### Runtime pages (captured from the running app)
+
+| Page | Screenshot |
+| --- | --- |
+| Login | ![Login page](docs/screenshots/pages/page-login.png) |
+| Register | ![Register page](docs/screenshots/pages/page-register.png) |
+| Forgot password | ![Forgot password page](docs/screenshots/pages/page-forgot-password.png) |
+
+### Role-based UI
+
+| Role/page | Preview |
+| --- | --- |
+| Owner — Dashboard | ![Owner dashboard](docs/screenshots/roles/role-owner-dashboard.png) |
+| Owner — Workers management | ![Workers management](docs/screenshots/roles/role-owner-users.png) |
+| Owner — Tables management | ![Tables management](docs/screenshots/roles/role-owner-tables.png) |
+| Owner — Menus management | ![Menus management](docs/screenshots/roles/role-owner-menus.png) |
+| Owner — Order | ![Owner order](docs/screenshots/roles/role-owner-order.png) |
+| Owner — Order with active table and bill | ![Owner active order](docs/screenshots/roles/role-owner-order-table.png) |
+| Worker — Order | ![Worker order screen](docs/screenshots/roles/role-worker-order.png) |
+
+The screenshots above were captured against the local Vite frontend and Express API with real MongoDB data. They were checked for visible error alerts, browser page errors, failed requests, and HTTP 5xx responses.
+
 <p align="center">
   <img src="docs/screenshots/app.png" alt="Restaurant POS app screenshot" width="800">
   <br>
@@ -51,6 +75,8 @@ WebServices-Sun-Pear/
 ## Environment Variables
 
 Create `backend/.env` from `backend/.env.example`.
+
+`MONGODB_URI` and `SECRET_KEY` are required for normal operation. `RESEND_API_KEY` is optional for local login/order testing; configure a real Resend key before using the forgot-password email/OTP flow. With the placeholder value, the backend stays available but returns a clear `503` response for that email feature.
 
 ## Run Locally
 

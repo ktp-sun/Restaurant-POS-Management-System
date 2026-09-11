@@ -2,7 +2,10 @@ const userModel = require('../model/userModel.js');
 const shopModel = require('../model/shopModel.js');
 const jwt = require('jsonwebtoken');
 const { Resend } = require("resend");
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey && !['change_me', ''].includes(resendApiKey)
+    ? new Resend(resendApiKey)
+    : null;
 const bcrypt = require('../utils/bcrypt.js');
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -111,6 +114,12 @@ let otpStore = {};
 
 async function forgotPassword(req, res) {
     try {
+        if (!resend) {
+            return res.status(503).json({
+                error: 'Password reset email service is not configured',
+                hint: 'Set RESEND_API_KEY to enable password reset emails'
+            });
+        }
         const { email } = req.body;
         if (!email) return res.status(400).json({ error: "Email is required" });
 
